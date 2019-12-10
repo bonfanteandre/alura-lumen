@@ -11,4 +11,11 @@ class EpisodesController extends BaseController
     {
         parent::__construct(Episode::class);
     }
+
+    public function bySerie(int $serieId)
+    {
+        $episodes = Episode::query()->where('serie_id', $serieId)->get();
+
+        return $episodes;
+    }
 }
