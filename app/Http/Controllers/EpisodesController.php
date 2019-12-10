@@ -12,10 +12,10 @@ class EpisodesController extends BaseController
         parent::__construct(Episode::class);
     }
 
-    public function bySerie(int $serieId)
+    public function bySerie(int $serieId, Request $request)
     {
-        $episodes = Episode::query()->where('serie_id', $serieId)->get();
-
-        return $episodes;
+        return Episode::query()
+            ->where('serie_id', $serieId)
+            ->paginate($request->per_page);
     }
 }

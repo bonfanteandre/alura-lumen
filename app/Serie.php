@@ -2,7 +2,7 @@
 
 namespace App;
 
-use Episode;
+use App\Episode;
 use Illuminate\Database\Eloquent\Model;
 
 class Serie extends Model
@@ -11,8 +11,18 @@ class Serie extends Model
 
     protected $fillable = ['name'];
 
+    protected $appends = ['links'];
+
     public function episodes()
     {
         return $this->hasMany(Episode::class);
+    }
+
+    public function getLinksAttribute($links): array
+    {
+        return [
+            'self' => '/api/series/' . $this->id,
+            'episodes' => '/api/series/' . $this->id . '/episodes'
+        ];
     }
 }
