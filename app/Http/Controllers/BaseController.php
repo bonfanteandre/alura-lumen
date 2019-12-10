@@ -13,9 +13,9 @@ abstract class BaseController extends Controller
         $this->class = $class;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        return $this->class::all();
+        return $this->class::paginate($request->per_page);
     }
 
     public function show(int $id)
